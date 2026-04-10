@@ -54,7 +54,7 @@ class _AddPageState extends State<AddPage> {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Что нужно сделать?',
-                hintText: 'Например: Купить молоко',
+                hintText: 'Добавить:',
               ),
             ),
             const SizedBox(height: 20),
