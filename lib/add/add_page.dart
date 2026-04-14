@@ -1,86 +1,106 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class AddPage extends StatefulWidget {
-  const AddPage({super.key});
-
+class AddPage extends StatefulWidget{
+  const AddPage ({super.key});
+  
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<StatefulWidget> createState() => _AddPage();
 }
-
-class _AddPageState extends State<AddPage> {
+class _AddPage extends State<AddPage>{
   late Timer _timer;
-  final TextEditingController _textController = TextEditingController();
+  TextEditingController _textEditingController=TextEditingController();
 
-  @override
+    @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     print('AddPage - initState');
-    // Оставляем твой таймер для отслеживания работы экрана
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       final date = DateTime.now();
-      print("Активное время: ${date.minute}:${date.second}");
+      print("${date.minute}: ${date.second}");
     });
   }
 
-  // Метод сохранения и возврата данных
-  void _saveTodo() {
-    final text = _textController.text.trim();
-    if (text.isNotEmpty) {
-      // Передаем текст обратно на главный экран
-      Navigator.pop(context, text);
-    } else {
-      // Если поле пустое, можно показать подсказку
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Введите название задачи')),
-      );
-    }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    print('AddPage - didChangeDependencies');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Новая задача"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text("Добавить задачу"),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+      body:Padding(
+  padding: const EdgeInsets.all(16),
+  child: 
+         Column(
+        
           children: [
             TextField(
-              controller: _textController,
-              autofocus: true,
-              decoration: const InputDecoration(
+              controller: _textEditingController,
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Что нужно сделать?',
-                hintText: 'Добавить:',
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: _saveTodo,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Colors.white,
+                label: Text('Введите название задчи')
+                )
                 ),
-                child: const Text("Сохранить задачу"),
+             const Spacer(),
+
+               
+                 SizedBox(
+        width: double.infinity,
+        child:
+            ElevatedButton(
+              onPressed: _saveTodo,
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50),
+                backgroundColor: const Color.fromARGB(255, 77, 172, 250),
+              ),
+              child: Text(
+                'Сохранить',
+                style: TextStyle(color: Colors.white),
               ),
             ),
+      ),
+
+           
           ],
         ),
-      ),
+      )
     );
+  }
+
+  void _saveTodo (){
+    Navigator.pop(context, _textEditingController.text);
+  }
+
+    @override
+  void didUpdateWidget(covariant AddPage oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    print('AddPage - didUpdateWidget');
+  }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+    print('AddPage - deactivate');
   }
 
   @override
   void dispose() {
-    print('AddPage - dispose');
-    _timer.cancel(); // Обязательно отменяем таймер
-    _textController.dispose(); // Освобождаем ресурсы контроллера
+    // TODO: implement dispose
     super.dispose();
+    print('AddPage - dispose');
+    _timer.cancel();
+    _textEditingController.dispose();
+    
   }
+
 }
