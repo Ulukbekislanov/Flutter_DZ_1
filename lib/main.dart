@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_01/home/home_page.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -18,13 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
 
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      
 
       home: const MyHomePage(title: 'Мои задачи'),
-      
-      
     );
-    
   }
-  
 }

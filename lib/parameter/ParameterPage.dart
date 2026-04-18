@@ -25,10 +25,7 @@ class _ParameterPageState extends State<ParameterPage> {
     return Theme(
       data: isDark ? ThemeData.dark() : ThemeData.light(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Настройки'),
-          centerTitle: true,
-        ),
+        appBar: AppBar(title: const Text('Настройки'), centerTitle: true),
         body: Column(
           children: [
             Container(
@@ -55,8 +52,9 @@ class _ParameterPageState extends State<ParameterPage> {
                         value: isDark,
                         onChanged: (value) {
                           setState(() {
-                            themeMode =
-                                value ? ThemeMode.dark : ThemeMode.light;
+                            themeMode = value
+                                ? ThemeMode.dark
+                                : ThemeMode.light;
                           });
                         },
                       ),
